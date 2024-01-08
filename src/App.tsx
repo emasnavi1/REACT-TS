@@ -12,7 +12,7 @@ function App() {
     },
     {
       id: 3,
-      name: "Aynova Masnavi",
+      name: "Aynova Masnavi Fesgheli",
     },
   ];
 
