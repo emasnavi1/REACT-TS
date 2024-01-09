@@ -8,12 +8,15 @@ interface Item {
 interface Props {
   items: Item[];
   heading: string;
+  // here you are trying to pass a fucntion as a prop, it reads it is fucntion
+  // that receives an input of type string and retunrs 'void'
+  onSelectItem: (item: Item) => void;
 }
 
-function ListGroup({ items, heading }: Props) {
+function ListGroup({ items, heading, onSelectItem }: Props) {
   const [selectedIndex, setSelectedIndex] = useState(0);
 
-  const handleClick = (item: any) => {
+  const handleClick = (item: Item) => {
     setSelectedIndex(item.id);
     console.log(item.name + " Clicked!");
   };
@@ -31,7 +34,10 @@ function ListGroup({ items, heading }: Props) {
                 : "list-group-item"
             }
             key={item.id}
-            onClick={() => handleClick(item)}
+            onClick={() => {
+              handleClick(item);
+              onSelectItem(item);
+            }}
           >
             {item.name}
           </li>
