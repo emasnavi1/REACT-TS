@@ -1,4 +1,5 @@
 import Alert from "./components/Alert";
+import AppButton from "./components/AppButton";
 import ListGroup from "./components/ListGroup";
 interface Item {
   id: number;
@@ -27,6 +28,10 @@ function App() {
     );
   };
 
+  const handleButtonClick = () => {
+    console.log("Button Pressed!");
+  };
+
   return (
     <>
       {/* <ListGroup
@@ -34,10 +39,15 @@ function App() {
         heading="Members"
         onSelectItem={handleSelectItem}
       /> */}
-      <Alert>
+
+      {/* <Alert>
         <h1> Alert! </h1>
         <p> Ahoyy! </p>
-      </Alert>
+      </Alert> */}
+
+      <AppButton onButtonClick={handleButtonClick} buttonColor="success">
+        This is your button
+      </AppButton>
     </>
   );
 }
