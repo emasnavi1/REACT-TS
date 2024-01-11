@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Alert from "./components/Alert";
 import AppButton from "./components/AppButton";
 import ListGroup from "./components/ListGroup";
@@ -29,8 +30,15 @@ function App() {
   };
 
   const handleButtonClick = () => {
+    setAlertVisibility(true);
     console.log("Button Pressed!");
   };
+
+  const handleAlertClose = () => {
+    setAlertVisibility(false);
+  };
+
+  const [alertVisbile, setAlertVisibility] = useState(false);
 
   return (
     <>
@@ -40,10 +48,12 @@ function App() {
         onSelectItem={handleSelectItem}
       /> */}
 
-      {/* <Alert>
-        <h1> Alert! </h1>
-        <p> Ahoyy! </p>
-      </Alert> */}
+      {alertVisbile && (
+        <Alert onClose={handleAlertClose}>
+          <h1> Alert! </h1>
+          <p> Ahoyy! </p>
+        </Alert>
+      )}
 
       <AppButton onButtonClick={handleButtonClick} buttonColor="success">
         This is your button

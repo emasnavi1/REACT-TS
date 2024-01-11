@@ -1,15 +1,32 @@
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 
 // Children is a special prop which allows you to use something like <Alert> Text to be shown </Alert> when you use it
 interface Props {
   children: ReactNode;
+  onClose: () => void;
 }
 
-function Alert({ children }: Props) {
+function Alert({ children, onClose }: Props) {
+  const [visbility, setVisibility] = useState(true);
+
   return (
-    <div className="alert alert-primary" role="alert">
-      {children}
-    </div>
+    <>
+      {visbility && (
+        <div
+          className="alert alert-warning alert-dismissible fade show"
+          role="alert"
+        >
+          {children}
+          <button
+            type="button"
+            className="btn-close"
+            data-bs-dismiss="alert"
+            aria-label="Close"
+            onClick={onClose}
+          ></button>
+        </div>
+      )}
+    </>
   );
 }
 
