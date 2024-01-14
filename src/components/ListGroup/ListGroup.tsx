@@ -1,4 +1,5 @@
 import { useState } from "react";
+import styles from "./ListGroup.module.css"; // By adding the kyword 'module' you limit the scope of this CSS to this component, so the CSS content would not be global
 
 interface Item {
   id: number;
@@ -25,6 +26,7 @@ function ListGroup({ items, heading, onSelectItem }: Props) {
     <>
       <h1>{heading}</h1>
       <ul className="list-group">
+        {/* <ul className={[styles.listGroup, styles.container].join(" ")}>  */}
         {items.length === 0 && <p>No items available to show! </p>}
         {items.map((item) => (
           <li

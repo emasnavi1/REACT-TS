@@ -1,7 +1,8 @@
 import { useState } from "react";
 import Alert from "./components/Alert";
 import AppButton from "./components/AppButton";
-import ListGroup from "./components/ListGroup";
+import { ListGroup, ListGroupWithStyled } from "./components/ListGroup";
+
 interface Item {
   id: number;
   name: string;
@@ -42,11 +43,11 @@ function App() {
 
   return (
     <>
-      {/* <ListGroup
+      <ListGroupWithStyled
         items={items}
         heading="Members"
         onSelectItem={handleSelectItem}
-      /> */}
+      />
 
       {alertVisbile && (
         <Alert onClose={handleAlertClose}>

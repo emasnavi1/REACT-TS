@@ -1,0 +1,1 @@
+- To be able to have CSS in your JS, or TSX similar to ReatNative, 3rd party librries shall be used. one of ths libraries is called 'styled-cmoponents', to get that you need to `npm install styled-components`

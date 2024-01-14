@@ -1,0 +1,10 @@
+/* This file is created to show how vanilla CSS works, however Mosh beleives using Vanilla CSS is tedious, and its better to use ot of the box xolsutions cuh as BootStrap */
+
+.listGroup{
+    list-style: none;
+    padding:0;
+}
+
+.container{
+    background-color:dodgerblue;
+}
