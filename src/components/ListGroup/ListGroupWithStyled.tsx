@@ -12,9 +12,14 @@ interface ListItemProps {
   active: boolean;
 }
 
+const setListItemStyle = (props: ListItemProps) => {
+  return props.active ? "Yellow" : "none";
+};
+
 const ListItem = styled.li<ListItemProps>`
   padding: 5px 0;
   background-color: ${(props) => (props.active ? "dodgerblue" : "none")};
+  color: ${setListItemStyle};
 `;
 
 interface Item {
