@@ -5,5 +5,6 @@
 
 import ListGroup from "./ListGroup";
 import ListGroupWithStyled from "./ListGroupwithStyled";
+import ListGroupMaterialUI from "./ListGroupMaterialUI";
 
-export { ListGroup, ListGroupWithStyled };
+export { ListGroup, ListGroupWithStyled, ListGroupMaterialUI };
