@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Alert from "./components/Alert";
 import AppButton from "./components/AppButton";
-import { ListGroup, ListGroupWithStyled } from "./components/ListGroup";
+import { ListGroup, ListGroupWithStyled, ListGroupMaterialUI } from "./components/ListGroup";
 
 interface Item {
   id: number;
@@ -43,7 +43,7 @@ function App() {
 
   return (
     <>
-      <ListGroupWithStyled
+      <ListGroupMaterialUI
         items={items}
         heading="Members"
         onSelectItem={handleSelectItem}
