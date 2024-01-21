@@ -1,35 +1,38 @@
 import { useState } from "react";
-import {List, ListItem, styled } from '@mui/material';
-import {ListItemProps} from '@mui/material/ListItem'
+import { List, ListItem, styled } from "@mui/material";
+import { ListItemProps } from "@mui/material/ListItem";
 
 // const List = styled.ul`
 //   list-style: none;
 //   padding: 0;
 // `;
 
-interface CustomizedListItemProps extends ListItemProps{
-  active?: boolean;
+interface CustomizedListItemProps extends ListItemProps {
+  active?: string;
 }
 
-const setListItemStyle = (props: CustomizedListItemProps) => {
-    console.log("Executing")
-    return props.active ? "Yellow" : ""; // or use an empty string
+const setListItemStyle = ({ active }: CustomizedListItemProps) => {
+  return {
+    padding: "5px 0",
+    backgroundColor: active === "true" ? "orange" : "",
+    color: "black",
   };
- 
+};
+
 //   const CustomListItem = styled(ListItem)<CustomizedListItemProps>((props:CustomizedListItemProps) => ({
 //     padding: '5px 0',
 //     backgroundColor: `${(props) => props.active === 'true' ? 'yellow' : ''}`,
 //     color: 'Green',
 // }));
 
-
 const CustomListItem = styled(ListItem)<CustomizedListItemProps>(
-    ({ active }) => ({
-      padding: "5px 0",
-      backgroundColor: active ? "yellow" : "",
-      color: "green",
-    })
-  );
+  ({ active }) => ({
+    padding: "5px 0",
+    backgroundColor: active === "true" ? "yellow" : "",
+    color: "green",
+  })
+  // setListItemStyle      // This right here also works!
+);
 
 interface Item {
   id: number;
@@ -57,22 +60,22 @@ function ListGroupMaterialUI({ items, heading, onSelectItem }: Props) {
       <h1>{heading}</h1>
       {/* <ul className="list-group"> */}
       <nav>
-      <List>
-        {items.length === 0 && <p>No items available to show! </p>}
-        {items.map((item) => (
-          <CustomListItem
-            active={(item.id === selectedIndex)}
-            key={item.id}
-            onClick={() => {
-              handleClick(item);
-              onSelectItem(item);
-            }}
-          >
-            {item.name}
-          </CustomListItem>
-        ))}
-        {/* </ul> */}
-      </List>
+        <List>
+          {items.length === 0 && <p>No items available to show! </p>}
+          {items.map((item) => (
+            <CustomListItem
+              active={(item.id === selectedIndex).toString()}
+              key={item.id}
+              onClick={() => {
+                handleClick(item);
+                onSelectItem(item);
+              }}
+            >
+              {item.name}
+            </CustomListItem>
+          ))}
+          {/* </ul> */}
+        </List>
       </nav>
     </>
   );
