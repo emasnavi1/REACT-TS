@@ -8,15 +8,15 @@ interface Props {
   onButtonClick: () => void;
 }
 
-const testFunction = () => {
-  console.log([styles.btn, styles["btn-" + "success"]].join(" "));
-};
-
 export default function AppButton({
   buttonColor = "primary", // you set the default value to 'primary'
   children,
   onButtonClick,
 }: Props) {
+  const testFunction = () => {
+    console.log([styles.btn, styles["btn-" + "success"]].join(" "));
+  };
+
   const handleClick = () => {
     // this is how you wrap two functions if you need to do more than one mthod to be called on an onLcik event. in this case
     // you did this bcuae you wanted to see what is th result of the joining the className of the button

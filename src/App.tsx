@@ -7,6 +7,8 @@ import {
   ListGroupMaterialUI,
 } from "./components/ListGroup";
 
+import { Like } from "./components/Like";
+
 interface Item {
   id: number;
   name: string;
@@ -43,6 +45,12 @@ function App() {
     setAlertVisibility(false);
   };
 
+  const handleLikeClick = () => {
+    console.log(
+      "Like button has been clicked and it has been communicated to the App.tsx page"
+    );
+  };
+
   const [alertVisbile, setAlertVisibility] = useState(false);
 
   return (
@@ -70,6 +78,8 @@ function App() {
       >
         This is your vanilla styled button
       </AppButtonVanillaStyled>
+
+      <Like onClick={handleLikeClick}></Like>
     </>
   );
 }
