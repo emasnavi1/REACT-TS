@@ -4,7 +4,7 @@
 // thats because the ListGroup component is actually listed in that index file
 
 import ListGroup from "./ListGroup";
-import ListGroupWithStyled from "./ListGroupwithStyled";
+import ListGroupWithStyled from "./ListGroupWithStyled";
 import ListGroupMaterialUI from "./ListGroupMaterialUI";
 
 export { ListGroup, ListGroupWithStyled, ListGroupMaterialUI };

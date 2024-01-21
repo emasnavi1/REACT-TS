@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { List, ListItem, styled } from "@mui/material";
 import { ListItemProps } from "@mui/material/ListItem";
+import { FaUserCircle } from "react-icons/fa";
 
 // const List = styled.ul`
 //   list-style: none;
@@ -30,6 +31,10 @@ const CustomListItem = styled(ListItem)<CustomizedListItemProps>(
     padding: "5px 0",
     backgroundColor: active === "true" ? "yellow" : "",
     color: "green",
+    "& .user-icon": {
+      marginRight: "10px",
+      color: active === "true" ? "red" : "inherit", // Use "inherit" to use the default color if not active
+    },
   })
   // setListItemStyle      // This right here also works!
 );
@@ -42,7 +47,7 @@ interface Item {
 interface Props {
   items: Item[];
   heading: string;
-  // here you are trying to pass a fucntion as a prop, it reads it is fucntion
+  // here you are trying to pass a function as a prop, it reads it is fucntion
   // that receives an input of type string and retunrs 'void'
   onSelectItem: (item: Item) => void;
 }
@@ -71,6 +76,10 @@ function ListGroupMaterialUI({ items, heading, onSelectItem }: Props) {
                 onSelectItem(item);
               }}
             >
+              <FaUserCircle
+                className="user-icon"
+                size={item.id === selectedIndex ? 40 : 20}
+              />
               {item.name}
             </CustomListItem>
           ))}

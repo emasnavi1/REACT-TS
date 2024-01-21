@@ -1,7 +1,11 @@
 import { useState } from "react";
 import Alert from "./components/Alert";
-import AppButton from "./components/AppButton";
-import { ListGroup, ListGroupWithStyled, ListGroupMaterialUI } from "./components/ListGroup";
+import { AppButton, AppButtonVanillaStyled } from "./components/Button";
+import {
+  ListGroup,
+  ListGroupWithStyled,
+  ListGroupMaterialUI,
+} from "./components/ListGroup";
 
 interface Item {
   id: number;
@@ -59,6 +63,13 @@ function App() {
       <AppButton onButtonClick={handleButtonClick} buttonColor="success">
         This is your button
       </AppButton>
+
+      <AppButtonVanillaStyled
+        onButtonClick={handleButtonClick}
+        buttonColor="success"
+      >
+        This is your vanilla styled button
+      </AppButtonVanillaStyled>
     </>
   );
 }

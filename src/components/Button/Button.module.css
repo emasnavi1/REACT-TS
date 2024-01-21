@@ -1,0 +1,18 @@
+.btn{
+    display: block;
+    margin-top: 10px;
+    padding: 8px 12px;
+    border-radius: 5px;
+    border: 0;
+}
+
+.btn-primary{
+    background-color: blue;
+    color: black;
+}
+
+.btn-success{
+    background-color: green;
+    color: whitesmoke;
+    font-weight: bold;
+}

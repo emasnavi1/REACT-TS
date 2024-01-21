@@ -1,4 +1,5 @@
-/* This file is created to show how vanilla CSS works, however Mosh beleives using Vanilla CSS is tedious, and its better to use ot of the box xolsutions cuh as BootStrap */
+/* This file is created to show how vanilla CSS works, however Mosh beleives using Vanilla CSS is tedious, and its better to use ot of the box solutions such as BootStrap */
+/* By adding the kyword 'module' you limit the scope of this CSS to this component, so the CSS content would not be global */
 
 .listGroup{
     list-style: none;
