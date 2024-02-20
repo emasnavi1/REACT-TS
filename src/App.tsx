@@ -8,6 +8,9 @@ import {
 } from "./components/ListGroup";
 
 import { Like } from "./components/Like";
+import { Navbar } from "./components/Navbar";
+import Cart from "./components/Cart";
+import { ExpandableText } from "./components/ExpandanbleText";
 
 interface Item {
   id: number;
@@ -53,6 +56,12 @@ function App() {
 
   const [alertVisbile, setAlertVisibility] = useState(false);
 
+  const [cartItems, setCartItems] = useState(["Product 1", "Prodcut 2"]);
+
+  const clearCart = () => {
+    setCartItems([]);
+  };
+
   return (
     <>
       <ListGroupMaterialUI
@@ -80,6 +89,26 @@ function App() {
       </AppButtonVanillaStyled>
 
       <Like onClick={handleLikeClick}></Like>
+
+      <Navbar cartItemsCount={cartItems.length} />
+      <Cart cartItems={cartItems} onClear={clearCart} />
+
+      <ExpandableText>
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptas
+        sapiente qui assumenda error ratione est asperiores amet necessitatibus
+        quo, iure voluptatum corporis cum doloremque molestiae dolore?
+        Blanditiis in soluta dignissimos! Nisi repellendus enim aspernatur
+        dolorem quasi, fugiat, vitae dignissimos mollitia corporis alias
+        consectetur maiores quam earum nam magnam illum. Dolor, harum fuga natus
+        eos consequuntur odit! Aperiam illo minus fugiat ad harum distinctio
+        illum amet, voluptatum magnam, corporis obcaecati consequuntur dolore
+        numquam excepturi reprehenderit fugit recusandae fuga ut nemo nisi
+        explicabo inventore expedita! Provident voluptates tempora eius
+        voluptate, aspernatur optio eligendi praesentium sint cumque quo quidem
+        excepturi rerum dolor vero?
+      </ExpandableText>
+
+      <ExpandableText>Lorem ipsum</ExpandableText>
     </>
   );
 }

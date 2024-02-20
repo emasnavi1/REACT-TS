@@ -1,0 +1,18 @@
+.txt-expanded{
+    display: block;
+    margin-top: 10px;
+    padding: 8px 12px;
+    border-radius: 5px;
+    border: 0;
+    background-color: green;
+    width: 100px;
+}
+
+.txt-retracted{
+    display: block;
+    margin-top: 10px;
+    padding: 8px 12px;
+    border-radius: 5px;
+    border: 0;
+    background-color: green;
+}

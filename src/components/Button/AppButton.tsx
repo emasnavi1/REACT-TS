@@ -14,7 +14,7 @@ export default function AppButton({
 }: Props) {
   return (
     // The line that has been removed was the original line from bootstrap, but you
-    // wanted to dinmically change the color, so you are set the ClassName value
+    // wanted to dinmically change the color, so you are setting the ClassName value
     // dynamically
     // <button type="button" className="btn btn-primary">Primary</button>
     <button
