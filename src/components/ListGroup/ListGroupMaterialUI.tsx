@@ -12,13 +12,11 @@ interface CustomizedListItemProps extends ListItemProps {
   active?: string;
 }
 
-const setListItemStyle = ({ active }: CustomizedListItemProps) => {
-  return {
-    padding: "5px 0",
-    backgroundColor: active === "true" ? "orange" : "",
-    color: "black",
-  };
-};
+const setListItemStyle = ({ active }: CustomizedListItemProps) => ({
+  padding: "5px 0",
+  backgroundColor: active === "true" ? "orange" : "",
+  color: "black",
+});
 
 //   const CustomListItem = styled(ListItem)<CustomizedListItemProps>((props:CustomizedListItemProps) => ({
 //     padding: '5px 0',

@@ -9,7 +9,7 @@ interface Item {
 interface Props {
   items: Item[];
   heading: string;
-  // here you are trying to pass a fucntion as a prop, it reads it is fucntion
+  // here you are trying to pass a function as a prop, it reads it is fucntion
   // that receives an input of type string and retunrs 'void'
   onSelectItem: (item: Item) => void;
 }

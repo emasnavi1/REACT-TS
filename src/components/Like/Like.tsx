@@ -10,7 +10,7 @@ export default function Like({ onClick }: Props) {
 
   const handleClick = () => {
     setIsLiked(!isLiked);
-    console.log("Status is " + isLiked); // If yu see this trace message in the browser you will see that its value is actually reverse of what it is set here
+    console.log("Status is " + isLiked); // If you see this trace message in the browser you will see that its value is actually reverse of what it is set here
     // that is becuase the state Hook will update the state once the handleClick has been executed and the excution reached
     // the "};" at the end of the handleClick function
     onClick();
