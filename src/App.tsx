@@ -11,6 +11,7 @@ import { Like } from "./components/Like";
 import { Navbar } from "./components/Navbar";
 import Cart from "./components/Cart";
 import { ExpandableText } from "./components/ExpandanbleText";
+import Form from "./components/Form/Form";
 
 interface Item {
   id: number;
@@ -109,6 +110,8 @@ function App() {
       </ExpandableText>
 
       <ExpandableText>Lorem ipsum</ExpandableText>
+
+      <Form></Form>
     </>
   );
 }
