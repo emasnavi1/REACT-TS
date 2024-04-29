@@ -11,7 +11,9 @@ import { Like } from "./components/Like";
 import { Navbar } from "./components/Navbar";
 import Cart from "./components/Cart";
 import { ExpandableText } from "./components/ExpandanbleText";
-import Form from "./components/Form/Form";
+
+import FormWithReactHookForm from "./components/Form/FormWithRactHookForm";
+import FormWithUseRef from "./components/Form/FormWithUseRef";
 
 interface Item {
   id: number;
@@ -111,7 +113,9 @@ function App() {
 
       <ExpandableText>Lorem ipsum</ExpandableText>
 
-      <Form></Form>
+      <FormWithUseRef></FormWithUseRef>
+
+      <FormWithReactHookForm></FormWithReactHookForm>
     </>
   );
 }

@@ -5,7 +5,7 @@ interface Person {
   age: Number;
 }
 
-export default function Form() {
+export default function FormWithUseRef() {
   // This is what you typed in orer to create the contents of the first form: "div>mb-3>label.form-label+input.form-control"
   // after typing the above and pressig the tab, the markup will create a div, with its contents as is available below. This is
   // a quick way of implrnting code
