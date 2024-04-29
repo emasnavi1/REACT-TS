@@ -12,8 +12,7 @@ import { Navbar } from "./components/Navbar";
 import Cart from "./components/Cart";
 import { ExpandableText } from "./components/ExpandanbleText";
 
-import FormWithReactHookForm from "./components/Form/FormWithRactHookForm";
-import FormWithUseRef from "./components/Form/FormWithUseRef";
+import { FormWithReactHookForm, FormWithUseRef } from "./components/Form";
 
 interface Item {
   id: number;
