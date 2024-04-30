@@ -4,6 +4,8 @@
 - npm install bootstrap
 - npm install react-icons@latest
 - npm install react-hook-form@latest
+- npm install zod@latest
+- npm install @hookform/resolvers@latest
 
 # Useful extentions you installed for this course:
 

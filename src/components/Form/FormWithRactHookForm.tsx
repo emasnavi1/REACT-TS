@@ -9,7 +9,7 @@ export default function FormWithReactHookForm() {
   const {
     register,
     handleSubmit,
-    formState: { errors }, // this is called nested destructuring, you are taking the errors segment of the formState out
+    formState: { errors, isValid }, // this is called nested destructuring, you are taking the errors segment of the formState out
   } = useForm<FormData>();
 
   console.log(errors);
@@ -60,7 +60,7 @@ export default function FormWithReactHookForm() {
         />
       </div>
 
-      <button className="btn btn-primary" type="submit">
+      <button className="btn btn-primary" type="submit" disabled={!isValid}>
         Submit
       </button>
     </form>

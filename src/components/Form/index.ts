@@ -1,4 +1,5 @@
+import FormWithReactHookAndZod from "./FormWithReactHookAndZod";
 import FormWithReactHookForm from "./FormWithRactHookForm";
 import FormWithUseRef from "./FormWithUseRef";
 
-export{FormWithReactHookForm, FormWithUseRef}
+export{FormWithReactHookAndZod,FormWithReactHookForm, FormWithUseRef}
