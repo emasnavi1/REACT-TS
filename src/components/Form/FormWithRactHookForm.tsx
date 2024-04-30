@@ -1,9 +1,19 @@
-import { FieldValues, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
+
+interface FormData {
+  name: string;
+  age: number;
+}
 
 export default function FormWithReactHookForm() {
-  const { register, handleSubmit } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }, // this is called nested destructuring, you are taking the errors segment of the formState out
+  } = useForm<FormData>();
 
-  const onSubmit = (data: FieldValues) => {
+  console.log(errors);
+  const onSubmit = (data: FormData) => {
     console.log(data);
   };
 
@@ -23,10 +33,19 @@ export default function FormWithReactHookForm() {
         </label>
         <input
           id="name"
-          {...register("name")}
+          {...register("name", { required: true, minLength: 5 })}
           type="text"
           className="form-control"
         />
+        {/* 'errors.name?.type' this is called optional chaining, this means check the 'type === "required" only if the 'errors' has a property called 'name' */}
+        {errors.name?.type === "required" && (
+          <p className="text-danger">The Name field is require</p>
+        )}
+        {errors.name?.type === "minLength" && (
+          <p className="text-danger">
+            Minimum 5 Charachters required as the Name
+          </p>
+        )}
       </div>
 
       <div className="mb-3">
