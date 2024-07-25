@@ -6,7 +6,7 @@ const schema = z.object({
   name: z.string().min(5, { message: "Name must be at least 5 charachters" }),
   age: z
     .number({ invalid_type_error: "Age field is required" })
-    .min(18, { message: "Age shall be a numebr bugger than 18" }),
+    .min(18, { message: "Age shall be a numebr bigger than 18" }),
 });
 
 type FormData = z.infer<typeof schema>;
