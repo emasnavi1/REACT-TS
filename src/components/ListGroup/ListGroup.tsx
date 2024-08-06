@@ -1,5 +1,5 @@
 import { useState } from "react";
-import styles from "./ListGroup.module.css"; // By adding the kyword 'module' you limit the scope of this CSS to this component, so the CSS content would not be global
+import styles from "./ListGroup.module.css"; // By adding the keyword 'module' you limit the scope of this CSS to this component, so the CSS content would not be global
 
 interface Item {
   id: number;

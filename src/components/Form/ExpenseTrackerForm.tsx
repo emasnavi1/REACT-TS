@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { object, z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 
@@ -24,6 +24,7 @@ type FormData = z.infer<typeof defaultSchema>;
 export default function ExpenseTrackerFrom() {
   const [categories, setCategories] = useState(initialCategories);
   const [newCategory, setNewCategory] = useState("");
+  const [expenseList, setExpenseList] = useState<FormData[]>([]);
 
   const {
     register,
@@ -31,9 +32,22 @@ export default function ExpenseTrackerFrom() {
     formState: { errors, isValid }, // this is called nested destructuring, you are taking the errors segment of the formState out
   } = useForm<FormData>({ resolver: zodResolver(schema(categories)) });
 
-  console.log(errors);
+  //console.log(errors);
+
   const onSubmit = (data: FormData) => {
-    console.log(data);
+    const expenseExists = expenseList.some(
+      (x) => x.description === data.description && x.category === data.category
+    );
+    if (!expenseExists) {
+      const updatedExpenseList = [...expenseList, data];
+      setExpenseList(updatedExpenseList);
+      console.log(updatedExpenseList);
+      console.log(Object.keys(updatedExpenseList[0]));
+    } else {
+      console.log(
+        "The expense" + data.description + "is already in the expense list"
+      );
+    }
   };
 
   const addCategory = (newCategory: string) => {
@@ -115,6 +129,10 @@ export default function ExpenseTrackerFrom() {
           Submit
         </button>
       </form>
+
+      <div className="mt-5">
+        <p>Expense list</p>
+      </div>
     </div>
   );
 }

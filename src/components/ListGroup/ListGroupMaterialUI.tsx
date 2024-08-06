@@ -25,7 +25,7 @@ const setListItemStyle = ({ active }: CustomizedListItemProps) => ({
 // }));
 
 // <CustomizedListItemProps> indicates the props that the styled component CustomListItem expects.
-// This is a TypeScript syntax.It tells the TypeScript compiler the expected props interface for CustomListItem.
+// This is a TypeScript syntax. It tells the TypeScript compiler the expected props interface for CustomListItem.
 const CustomListItem = styled(ListItem)<CustomizedListItemProps>(
   ({ active }: CustomizedListItemProps) => ({
     padding: "5px 0",
