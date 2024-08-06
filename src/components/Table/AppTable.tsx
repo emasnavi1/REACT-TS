@@ -1,8 +1,12 @@
 interface Props<T> {
   data: T[];
+  onButtonClick: (index: number) => void;
 }
 
-export default function AppTable<T extends Object>({ data }: Props<T>) {
+export default function AppTable<T extends Object>({
+  data,
+  onButtonClick,
+}: Props<T>) {
   if (data.length === 0) {
     return <div>No data available</div>;
   }
@@ -11,12 +15,13 @@ export default function AppTable<T extends Object>({ data }: Props<T>) {
 
   return (
     <>
-      <table>
+      <table className="table">
         <thead>
           <tr>
             {keys.map((key) => (
-              <th key={key}>{key}</th>
+              <th key={key}>{key.toUpperCase()}</th>
             ))}
+            <th>REMOVE EXPENSE</th>
           </tr>
         </thead>
 
@@ -26,6 +31,14 @@ export default function AppTable<T extends Object>({ data }: Props<T>) {
               {keys.map((key) => (
                 <td key={key}>{String(item[key as keyof T])}</td>
               ))}
+              <td>
+                <button
+                  className="btn btn-primary"
+                  onClick={() => onButtonClick(index)}
+                >
+                  Remove Expense
+                </button>
+              </td>
             </tr>
           ))}
         </tbody>
@@ -33,7 +46,6 @@ export default function AppTable<T extends Object>({ data }: Props<T>) {
     </>
   );
 }
-
 
 // simple table example for your ease of underestadning:
 // const data = [

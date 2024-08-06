@@ -58,6 +58,12 @@ export default function ExpenseTrackerFrom() {
     }
   };
 
+  const removeExpense = (index: number) => {
+    const newExpenseList = [...expenseList]
+    newExpenseList.splice(index, 1);
+    setExpenseList(newExpenseList)
+  }
+
   return (
     <div className="mt-5">
       <div className="mb-3">
@@ -132,7 +138,7 @@ export default function ExpenseTrackerFrom() {
       </form>
 
       <div className="mt-5">
-        <AppTable data={expenseList} />
+        <AppTable data={expenseList} onButtonClick={removeExpense}/>
       </div>
     </div>
   );
