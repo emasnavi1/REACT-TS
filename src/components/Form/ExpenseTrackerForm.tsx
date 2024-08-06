@@ -1,7 +1,8 @@
 import { useForm } from "react-hook-form";
-import { object, z } from "zod";
+import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
+import AppTable from "../Table/AppTable";
 
 const initialCategories = ["Utilities", "Groceries", "Entertainment"];
 
@@ -131,7 +132,7 @@ export default function ExpenseTrackerFrom() {
       </form>
 
       <div className="mt-5">
-        <p>Expense list</p>
+        <AppTable data={expenseList} />
       </div>
     </div>
   );
