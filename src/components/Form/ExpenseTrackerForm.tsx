@@ -6,7 +6,7 @@ import { useState } from "react";
 import AppTable from "../Table/AppTable";
 
 const initialCategories = ["Utilities", "Groceries", "Entertainment"];
-const defaultFilterValue = "All";
+const defaultFilterValue = "All Categories";
 
 const schema = (categories: string[]) =>
   z.object({
@@ -29,7 +29,7 @@ export default function ExpenseTrackerFrom() {
   const [newCategory, setNewCategory] = useState("");
   const [expenseList, setExpenseList] = useState<FormData[]>([]);
   const [filterCategories, setFilterCategories] = useState([
-    "All",
+    defaultFilterValue,
     ...initialCategories,
   ]);
   const [filterValue, setFilterValue] = useState(defaultFilterValue);
@@ -184,7 +184,11 @@ export default function ExpenseTrackerFrom() {
       </div>
 
       <div className="mt-5">
-        <AppTable data={filteredExpenseList} onButtonClick={removeExpense} />
+        <AppTable
+          data={filteredExpenseList}
+          onButtonClick={removeExpense}
+          calculateTotalOn="amount"
+        />
       </div>
     </div>
   );

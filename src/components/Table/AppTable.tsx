@@ -1,14 +1,22 @@
 interface Props<T> {
   data: T[];
+  calculateTotalOn: string;
   onButtonClick: (item: T) => void;
 }
 
 export default function AppTable<T extends Object>({
   data,
+  calculateTotalOn,
   onButtonClick,
 }: Props<T>) {
+  let total = 0.0;
   if (data.length === 0) {
     return <div>No data available</div>;
+  } else {
+    total = data.reduce(
+      (acc, expense) => acc + (expense[calculateTotalOn as keyof T] as number),
+      0
+    );
   }
 
   const keys = Object.keys(data[0]);
@@ -41,6 +49,10 @@ export default function AppTable<T extends Object>({
               </td>
             </tr>
           ))}
+          <tr>
+            <td className="fw-bold">Total:</td>
+            <td className="fw-bold">{total}</td>
+          </tr>
         </tbody>
       </table>
     </>
