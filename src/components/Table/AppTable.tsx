@@ -1,6 +1,6 @@
 interface Props<T> {
   data: T[];
-  onButtonClick: (index: number) => void;
+  onButtonClick: (item: T) => void;
 }
 
 export default function AppTable<T extends Object>({
@@ -34,7 +34,7 @@ export default function AppTable<T extends Object>({
               <td>
                 <button
                   className="btn btn-outline-danger"
-                  onClick={() => onButtonClick(index)}
+                  onClick={() => onButtonClick(data[index])}
                 >
                   Remove Expense
                 </button>

@@ -40,6 +40,7 @@ export default function ExpenseTrackerFrom() {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors, isValid }, // this is called nested destructuring, you are taking the errors segment of the formState out
   } = useForm<FormData>({ resolver: zodResolver(schema(categories)) });
 
@@ -50,12 +51,13 @@ export default function ExpenseTrackerFrom() {
     if (!expenseExists) {
       const updatedExpenseList = [...expenseList, data];
       setExpenseList(updatedExpenseList);
-      updateFilteredExpenseList();
     } else {
       console.log(
         "The expense" + data.description + "is already in the expense list"
       );
     }
+
+    reset();
   };
 
   const addCategory = (newCategory: string) => {
@@ -66,9 +68,10 @@ export default function ExpenseTrackerFrom() {
     }
   };
 
-  const removeExpense = (index: number) => {
-    const newExpenseList = [...expenseList];
-    newExpenseList.splice(index, 1);
+  const removeExpense = (expenseToRemove: FormData) => {
+    const newExpenseList = expenseList.filter(
+      (expense) => expense !== expenseToRemove
+    );
     setExpenseList(newExpenseList);
   };
 
@@ -88,8 +91,6 @@ export default function ExpenseTrackerFrom() {
 
   const onFilterChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setFilterValue(event.target.value);
-    updateFilteredExpenseList();
-    console.log(filteredExpenseList);
   };
 
   return (
