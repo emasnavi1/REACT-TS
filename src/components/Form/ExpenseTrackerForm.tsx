@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -5,6 +6,7 @@ import { useState } from "react";
 import AppTable from "../Table/AppTable";
 
 const initialCategories = ["Utilities", "Groceries", "Entertainment"];
+const defaultFilterValue = "All";
 
 const schema = (categories: string[]) =>
   z.object({
@@ -26,14 +28,20 @@ export default function ExpenseTrackerFrom() {
   const [categories, setCategories] = useState(initialCategories);
   const [newCategory, setNewCategory] = useState("");
   const [expenseList, setExpenseList] = useState<FormData[]>([]);
+  const [filterCategories, setFilterCategories] = useState([
+    "All",
+    ...initialCategories,
+  ]);
+  const [filterValue, setFilterValue] = useState(defaultFilterValue);
+  const [filteredExpenseList, setFilteredExpenseList] = useState<FormData[]>(
+    []
+  );
 
   const {
     register,
     handleSubmit,
     formState: { errors, isValid }, // this is called nested destructuring, you are taking the errors segment of the formState out
   } = useForm<FormData>({ resolver: zodResolver(schema(categories)) });
-
-  //console.log(errors);
 
   const onSubmit = (data: FormData) => {
     const expenseExists = expenseList.some(
@@ -42,8 +50,7 @@ export default function ExpenseTrackerFrom() {
     if (!expenseExists) {
       const updatedExpenseList = [...expenseList, data];
       setExpenseList(updatedExpenseList);
-      console.log(updatedExpenseList);
-      console.log(Object.keys(updatedExpenseList[0]));
+      updateFilteredExpenseList();
     } else {
       console.log(
         "The expense" + data.description + "is already in the expense list"
@@ -54,15 +61,36 @@ export default function ExpenseTrackerFrom() {
   const addCategory = (newCategory: string) => {
     if (newCategory && !categories.includes(newCategory)) {
       setCategories([...categories, newCategory]);
+      setFilterCategories([...filterCategories, newCategory]);
       setNewCategory("");
     }
   };
 
   const removeExpense = (index: number) => {
-    const newExpenseList = [...expenseList]
+    const newExpenseList = [...expenseList];
     newExpenseList.splice(index, 1);
-    setExpenseList(newExpenseList)
-  }
+    setExpenseList(newExpenseList);
+  };
+
+  useEffect(() => {
+    updateFilteredExpenseList();
+  }, [expenseList, filterValue]);
+
+  const updateFilteredExpenseList = () => {
+    if (filterValue === defaultFilterValue) {
+      setFilteredExpenseList(expenseList);
+    } else {
+      setFilteredExpenseList(
+        expenseList.filter((expense) => expense.category === filterValue)
+      );
+    }
+  };
+
+  const onFilterChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setFilterValue(event.target.value);
+    updateFilteredExpenseList();
+    console.log(filteredExpenseList);
+  };
 
   return (
     <div className="mt-5">
@@ -137,8 +165,25 @@ export default function ExpenseTrackerFrom() {
         </button>
       </form>
 
+      <div className="mb-3">
+        <label htmlFor="categoryFilter" className="form-label">
+          Category Filter:
+        </label>
+        <select
+          id="categoryFilter"
+          className="form-select"
+          onChange={onFilterChange}
+        >
+          {filterCategories.map((category) => (
+            <option key={category} value={category}>
+              {category}
+            </option>
+          ))}
+        </select>
+      </div>
+
       <div className="mt-5">
-        <AppTable data={expenseList} onButtonClick={removeExpense}/>
+        <AppTable data={filteredExpenseList} onButtonClick={removeExpense} />
       </div>
     </div>
   );

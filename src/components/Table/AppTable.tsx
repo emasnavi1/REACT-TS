@@ -15,7 +15,7 @@ export default function AppTable<T extends Object>({
 
   return (
     <>
-      <table className="table">
+      <table className="table table-bordered">
         <thead>
           <tr>
             {keys.map((key) => (
@@ -33,7 +33,7 @@ export default function AppTable<T extends Object>({
               ))}
               <td>
                 <button
-                  className="btn btn-primary"
+                  className="btn btn-outline-danger"
                   onClick={() => onButtonClick(index)}
                 >
                   Remove Expense
