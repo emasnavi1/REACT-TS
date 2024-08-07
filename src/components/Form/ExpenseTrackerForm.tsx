@@ -68,6 +68,10 @@ export default function ExpenseTrackerFrom() {
     }
   };
 
+  // when you filter an array in JavaScript, the resulting array is a new array,
+  // but the elements within the new array are references to the same objects as
+  // those in the original array.This means that the objects themselves are not
+  // copied or cloned; only the array structure is new.
   const removeExpense = (expenseToRemove: FormData) => {
     const newExpenseList = expenseList.filter(
       (expense) => expense !== expenseToRemove
