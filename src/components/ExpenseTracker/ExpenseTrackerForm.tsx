@@ -3,7 +3,8 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
-import AppTable from "../Table/AppTable";
+import AppExpenseTable from "./ExpenseTable";
+import ExpenseFilter from "./ExpenseFilter";
 
 const initialCategories = ["Utilities", "Groceries", "Entertainment"];
 const defaultFilterValue = "All Categories";
@@ -28,14 +29,7 @@ export default function ExpenseTrackerFrom() {
   const [categories, setCategories] = useState(initialCategories);
   const [newCategory, setNewCategory] = useState("");
   const [expenseList, setExpenseList] = useState<FormData[]>([]);
-  const [filterCategories, setFilterCategories] = useState([
-    defaultFilterValue,
-    ...initialCategories,
-  ]);
   const [filterValue, setFilterValue] = useState(defaultFilterValue);
-  const [filteredExpenseList, setFilteredExpenseList] = useState<FormData[]>(
-    []
-  );
 
   const {
     register,
@@ -63,7 +57,6 @@ export default function ExpenseTrackerFrom() {
   const addCategory = (newCategory: string) => {
     if (newCategory && !categories.includes(newCategory)) {
       setCategories([...categories, newCategory]);
-      setFilterCategories([...filterCategories, newCategory]);
       setNewCategory("");
     }
   };
@@ -79,22 +72,17 @@ export default function ExpenseTrackerFrom() {
     setExpenseList(newExpenseList);
   };
 
-  useEffect(() => {
-    updateFilteredExpenseList();
-  }, [expenseList, filterValue]);
-
-  const updateFilteredExpenseList = () => {
-    if (filterValue === defaultFilterValue) {
-      setFilteredExpenseList(expenseList);
+  // The trick here is to not to create a new state variable when you
+  // can use the existing one to calculate. in this example, you originally
+  // had a state variable to hold the filteredExpeseList, however since
+  // it always can be calculated knowing the filterValue and the expenseList, 
+  // then it can be calculated in real time. 
+  const updateFilteredExpenseList = (value: string) => {
+    if (value === defaultFilterValue) {
+      return expenseList;
     } else {
-      setFilteredExpenseList(
-        expenseList.filter((expense) => expense.category === filterValue)
-      );
+      return expenseList.filter((expense) => expense.category === value);
     }
-  };
-
-  const onFilterChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setFilterValue(event.target.value);
   };
 
   return (
@@ -170,27 +158,12 @@ export default function ExpenseTrackerFrom() {
         </button>
       </form>
 
-      <div className="mb-3">
-        <label htmlFor="categoryFilter" className="form-label">
-          Category Filter:
-        </label>
-        <select
-          id="categoryFilter"
-          className="form-select"
-          onChange={onFilterChange}
-        >
-          {filterCategories.map((category) => (
-            <option key={category} value={category}>
-              {category}
-            </option>
-          ))}
-        </select>
-      </div>
+      <ExpenseFilter categories={categories} onSelect={setFilterValue} />
 
       <div className="mt-5">
-        <AppTable
-          data={filteredExpenseList}
-          onButtonClick={removeExpense}
+        <AppExpenseTable
+          data={updateFilteredExpenseList(filterValue)}
+          onDelete={removeExpense}
           calculateTotalOn="amount"
         />
       </div>

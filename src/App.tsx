@@ -17,7 +17,7 @@ import {
   FormWithReactHookForm,
   FormWithUseRef,
 } from "./components/Form";
-import ExpenseTrackerFrom from "./components/Form/ExpenseTrackerForm";
+import ExpenseTrackerFrom from "./components/ExpenseTracker/ExpenseTrackerForm";
 
 interface Item {
   id: number;

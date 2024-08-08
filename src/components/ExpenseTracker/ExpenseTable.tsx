@@ -1,13 +1,13 @@
 interface Props<T> {
   data: T[];
   calculateTotalOn: string;
-  onButtonClick: (item: T) => void;
+  onDelete: (item: T) => void;
 }
 
-export default function AppTable<T extends Object>({
+export default function AppExpenseTable<T extends Object>({
   data,
   calculateTotalOn,
-  onButtonClick,
+  onDelete,
 }: Props<T>) {
   let total = 0.0;
   if (data.length === 0) {
@@ -42,18 +42,20 @@ export default function AppTable<T extends Object>({
               <td>
                 <button
                   className="btn btn-outline-danger"
-                  onClick={() => onButtonClick(data[index])}
+                  onClick={() => onDelete(data[index])}
                 >
                   Remove Expense
                 </button>
               </td>
             </tr>
           ))}
+        </tbody>
+        <tfoot>
           <tr>
             <td className="fw-bold">Total:</td>
-            <td className="fw-bold">{total}</td>
+            <td className="fw-bold">${total}</td>
           </tr>
-        </tbody>
+        </tfoot>
       </table>
     </>
   );
