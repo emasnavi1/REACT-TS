@@ -18,6 +18,7 @@ import {
   FormWithUseRef,
 } from "./components/Form";
 import ExpenseTrackerFrom from "./components/ExpenseTracker/ExpenseTrackerApp";
+import FetchData from "./components/FetchData";
 
 interface Item {
   id: number;
@@ -122,7 +123,10 @@ function App() {
       <FormWithReactHookForm></FormWithReactHookForm>
 
       <FormWithReactHookAndZod></FormWithReactHookAndZod>
+
       <ExpenseTrackerFrom></ExpenseTrackerFrom>
+
+      <FetchData />
     </>
   );
 }

@@ -6,6 +6,7 @@
 - npm install react-hook-form@latest
 - npm install zod@latest
 - npm install @hookform/resolvers@latest
+- npm install axios
 
 # Useful extentions you installed for this course:
 
@@ -19,3 +20,5 @@
 3. Tailwind css
 
 # For updating arrays and nested objects you are using imme
+
+# for getting some data from a backend for testing purposes use this wbsite: [www.jsonplaceholder.typicode.com](https://jsonplaceholder.typicode.com/)
