@@ -11,7 +11,7 @@ const customer = {
 
 const newCustomer = {
   ...customer,
-  addresse: {
+  address: {
     ...customer.address,
     zipCode: 94112,
   },
