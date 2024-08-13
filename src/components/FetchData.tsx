@@ -16,6 +16,7 @@ interface User {
 export default function fetchData() {
   const [users, setUsers] = useState<User[]>([]);
   const [error, setError] = useState("");
+  const [isLoading, setLoading] = useState(false);
 
   //  one can use async and await for fething data, however mosh prefers the below (better) approach
   //   useEffect(() => {
@@ -36,6 +37,7 @@ export default function fetchData() {
   // you added the controller later.
   useEffect(() => {
     const controller = new AbortController();
+    setLoading(true);
 
     axios
       .get<User[]>("https://jsonplaceholder.typicode.com/users", {
@@ -60,7 +62,8 @@ export default function fetchData() {
         else {
           setError(error.message);
         }
-      });
+      })
+      .finally(() => setTimeout(() => setLoading(false), 2000));
 
     return () => controller.abort(); // This is a cleanup function of your useEfect. It gets executed after you navigate away from the page.
     // in this specific case it aborts the fetch from the backend.
@@ -68,20 +71,23 @@ export default function fetchData() {
 
   return (
     <div>
-      <List>
-        {users.map((user) => (
-          <ListItem key={user.id}>
-            <FaUserCircle
-              className="user-icon"
-              size={20}
-              style={{ marginRight: "16px" }}
-            />
-            {user.name}
-            <br />
-            {user.email}
-          </ListItem>
-        ))}
-      </List>
+      {isLoading && <div className="spinner-border"></div>}
+      {!isLoading && (
+        <List>
+          {users.map((user) => (
+            <ListItem key={user.id}>
+              <FaUserCircle
+                className="user-icon"
+                size={20}
+                style={{ marginRight: "16px" }}
+              />
+              {user.name}
+              <br />
+              {user.email}
+            </ListItem>
+          ))}
+        </List>
+      )}
       {error && <p className="text-danger">{error}</p>}
     </div>
   );
