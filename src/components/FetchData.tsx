@@ -1,4 +1,4 @@
-import axios, { AxiosError, CanceledError, isCancel } from "axios";
+import apiClient, { CanceledError } from "../Services/api-client";
 import { useEffect, useState } from "react";
 import {
   List,
@@ -28,8 +28,8 @@ export default function fetchData() {
   const [isLoading, setLoading] = useState(false);
 
   const deleteUser = (user: User) => {
-    axios
-      .delete("https://jsonplaceholder.typicode.com/users/" + user.id)
+    apiClient
+      .delete("/users/" + user.id)
       .then(() => {
         setUsers(users.filter((item) => item.id !== user.id));
       })
@@ -59,8 +59,8 @@ export default function fetchData() {
     const controller = new AbortController();
     setLoading(true);
 
-    axios
-      .get<User[]>("https://jsonplaceholder.typicode.com/users", {
+    apiClient
+      .get<User[]>("/users", {
         signal: controller.signal,
       })
       .then((response) => {
