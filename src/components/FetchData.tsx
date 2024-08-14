@@ -1,7 +1,16 @@
 import axios, { AxiosError, CanceledError, isCancel } from "axios";
 import { useEffect, useState } from "react";
-import { List, ListItem } from "@mui/material";
+import {
+  List,
+  ListItem,
+  ListItemText,
+  ListItemAvatar,
+  IconButton,
+  Divider,
+} from "@mui/material";
 import { FaUserCircle } from "react-icons/fa";
+import { MdDelete } from "react-icons/md";
+import { original } from "immer";
 
 // note that the response received from the backend has more than
 // just "id" and "Name" as properties of a User, but in typeScript
@@ -17,6 +26,17 @@ export default function fetchData() {
   const [users, setUsers] = useState<User[]>([]);
   const [error, setError] = useState("");
   const [isLoading, setLoading] = useState(false);
+
+  const deleteUser = (user: User) => {
+    axios
+      .delete("https://jsonplaceholder.typicode.com/users/" + user.id)
+      .then(() => {
+        setUsers(users.filter((item) => item.id !== user.id));
+      })
+      .catch((error) => {
+        setError(error.message);
+      });
+  };
 
   //  one can use async and await for fething data, however mosh prefers the below (better) approach
   //   useEffect(() => {
@@ -63,7 +83,7 @@ export default function fetchData() {
           setError(error.message);
         }
       })
-      .finally(() => setTimeout(() => setLoading(false), 2000));
+      .finally(() => setTimeout(() => setLoading(false), 1000));
 
     return () => controller.abort(); // This is a cleanup function of your useEfect. It gets executed after you navigate away from the page.
     // in this specific case it aborts the fetch from the backend.
@@ -73,18 +93,38 @@ export default function fetchData() {
     <div>
       {isLoading && <div className="spinner-border"></div>}
       {!isLoading && (
-        <List>
+        <List sx={{ width: "100%", maxWidth: 400 }}>
           {users.map((user) => (
-            <ListItem key={user.id}>
-              <FaUserCircle
-                className="user-icon"
-                size={20}
-                style={{ marginRight: "16px" }}
-              />
-              {user.name}
-              <br />
-              {user.email}
-            </ListItem>
+            <div key={user.id}>
+              <ListItem
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  width: "100%",
+                  bgcolor: "background.black",
+                }}
+              >
+                <ListItemAvatar>
+                  <FaUserCircle size={24} />
+                </ListItemAvatar>
+                <ListItemText
+                  primary={user.name}
+                  secondary={user.email}
+                  primaryTypographyProps={{
+                    sx: { fontWeight: "bold", color: "#333" },
+                  }}
+                />
+
+                <IconButton
+                  aria-label="delete"
+                  onClick={() => deleteUser(user)}
+                >
+                  <MdDelete />
+                </IconButton>
+              </ListItem>
+              <Divider variant="fullWidth" component="li" />
+            </div>
           ))}
         </List>
       )}
