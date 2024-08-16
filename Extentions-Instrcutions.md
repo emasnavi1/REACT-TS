@@ -1,4 +1,4 @@
-# You used vite to create your reaxt project
+# You used vite to create your react project
 
 - npm create vite@latest
 - npm install bootstrap
