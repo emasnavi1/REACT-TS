@@ -1,4 +1,4 @@
-import apiClient, { CanceledError } from "../Services/api-client";
+import { CanceledError } from "../Services/api-client";
 import { useEffect, useState } from "react";
 import {
   List,
@@ -10,26 +10,16 @@ import {
 } from "@mui/material";
 import { FaUserCircle } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
-import { original } from "immer";
+import userServices, { User } from "../Services/user-services";
 
-// note that the response received from the backend has more than
-// just "id" and "Name" as properties of a User, but in typeScript
-// you can be more selective and only construct an inteface that only
-// captures the properties you are intersted in.
-interface User {
-  id: number;
-  name: string;
-  email: string;
-}
-
-export default function fetchData() {
+export default function UsersList() {
   const [users, setUsers] = useState<User[]>([]);
   const [error, setError] = useState("");
   const [isLoading, setLoading] = useState(false);
 
   const deleteUser = (user: User) => {
-    apiClient
-      .delete("/users/" + user.id)
+    userServices
+      .deleteUser(user)
       .then(() => {
         setUsers(users.filter((item) => item.id !== user.id));
       })
@@ -56,13 +46,11 @@ export default function fetchData() {
   // The following is another way of doing what is done in the above using async method, easier and simpler (Mosh suggests this)
   // you added the controller later.
   useEffect(() => {
-    const controller = new AbortController();
     setLoading(true);
 
-    apiClient
-      .get<User[]>("/users", {
-        signal: controller.signal,
-      })
+    const { request, cancel } = userServices.getAllUsers();
+
+    request
       .then((response) => {
         setUsers(response.data);
       })
@@ -85,7 +73,7 @@ export default function fetchData() {
       })
       .finally(() => setTimeout(() => setLoading(false), 1000));
 
-    return () => controller.abort(); // This is a cleanup function of your useEfect. It gets executed after you navigate away from the page.
+    return () => cancel(); // This is a cleanup function of your useEfect. It gets executed after you navigate away from the page.
     // in this specific case it aborts the fetch from the backend.
   }, []);
 

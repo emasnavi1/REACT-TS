@@ -18,7 +18,7 @@ import {
   FormWithUseRef,
 } from "./components/Form";
 import ExpenseTrackerFrom from "./components/ExpenseTracker/ExpenseTrackerApp";
-import FetchData from "./components/FetchData";
+import UsersList from "./components/UsersList";
 
 interface Item {
   id: number;
@@ -126,7 +126,7 @@ function App() {
 
       <ExpenseTrackerFrom></ExpenseTrackerFrom>
 
-      <FetchData />
+      <UsersList />
     </>
   );
 }
