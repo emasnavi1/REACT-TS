@@ -12,14 +12,14 @@ import { FaUserCircle } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import userServices, { User } from "../Services/user-services";
 
-export default function UsersList() {
+export default function fetchData() {
   const [users, setUsers] = useState<User[]>([]);
   const [error, setError] = useState("");
   const [isLoading, setLoading] = useState(false);
 
   const deleteUser = (user: User) => {
     userServices
-      .deleteUser(user)
+      .delete<User>(user)
       .then(() => {
         setUsers(users.filter((item) => item.id !== user.id));
       })
@@ -48,7 +48,7 @@ export default function UsersList() {
   useEffect(() => {
     setLoading(true);
 
-    const { request, cancel } = userServices.getAllUsers();
+    const { request, cancel } = userServices.getAll<User>();
 
     request
       .then((response) => {

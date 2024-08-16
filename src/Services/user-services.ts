@@ -1,4 +1,4 @@
-import apiClient from "./api-client";
+import createHttpService from "./http-service";
 
 // note that the response received from the backend has more than
 // just "id" and "Name" as properties of a User, but in typeScript
@@ -10,19 +10,4 @@ export interface User {
     email: string;
   }
 
-class UserService{
-
-    getAllUsers() {
-        const controller = new AbortController();
-        const request = apiClient.get<User[]>("/users", {
-        signal: controller.signal,
-      })
-        return{request, cancel: () => controller.abort()}
-    }
-
-
-    deleteUser(user : User) {
-        return apiClient.delete("/users/" + user.id);
-    }
-}
-export default new UserService();
+export default createHttpService("/users");
